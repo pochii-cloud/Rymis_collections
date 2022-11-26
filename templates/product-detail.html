@@ -1,0 +1,217 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% block head %}
+    <title>{{ product }} details</title>
+    {% endblock %}
+
+</head>
+
+<body>
+{% block body %}
+    <!-- Breadcrumb Start -->
+    <div class="breadcrumb-wrap">
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'Homepage' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'ProductList' %}">Products</a></li>
+                <li class="breadcrumb-item active">{{ product }} details</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Product Detail Start -->
+    <div class="product-detail">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="product-detail-top">
+                        <div class="row align-items-center">
+                            <div class="col-md-5">
+                                <div class="product-slider-single normal-slider">
+
+                                    <img src="{{ product.image.url }}" alt="Product Image" style="height: 250px;">
+                                    <img src="{{ product.image1.url }}" alt="Product Image" style="height: 250px;">
+                                    <img src="{{ product.image2.url }}" alt="Product Image" style="height: 250px;">
+                                    <img src="{{ product.image3.url }}" alt="Product Image" style="height: 250px;">
+                                    <img src="{{ product.image4.url }}" alt="Product Image" style="height: 250px;">
+                                    <img src="{{ product.image5.url }}" alt="Product Image" style="height: 250px;">
+                                    <img src="{{ product.image6.url }}" alt="Product Image" style="height: 250px;">
+                                    <img src="{{ product.image7.url }}" alt="Product Image" style="height: 250px;">
+                                    <img src="{{ product.image8.url }}" alt="Product Image" style="height: 250px;">
+                                    <img src="{{ product.image9.url }}" alt="Product Image" style="height: 250px;">
+
+                                </div>
+                                <div class="product-slider-single-nav normal-slider">
+                                    <div class="slider-nav-img"><img src="{{ product.image.url }}" alt="Product Image "
+                                                                     style="height: 50px;"></div>
+                                    <div class="slider-nav-img"><img src="{{ product.image1.url }}" alt="Product Image"
+                                                                     style="height: 50px;"></div>
+                                    <div class="slider-nav-img"><img src="{{ product.image2.url }}" alt="Product Image"
+                                                                     style="height: 50px;"></div>
+                                    <div class="slider-nav-img"><img src="{{ product.image3.url }}" alt="Product Image" style="height: 50px;"></div>
+                                    <div class="slider-nav-img"><img src="{{ product.image4.url }}" alt="Product Image" style="height: 50px;"></div>
+                                    <div class="slider-nav-img"><img src="{{ product.image5.url }}" alt="Product Image" style="height: 50px;"></div>
+                                    <div class="slider-nav-img"><img src="{{ product.image6.url }}" alt="Product Image" style="height: 50px;"></div>
+                                    <div class="slider-nav-img"><img src="{{ product.image7.url }}" alt="Product Image" style="height: 50px;"></div>
+                                    <div class="slider-nav-img"><img src="{{ product.image8.url }}" alt="Product Image" style="height: 50px;"></div>
+                                    <div class="slider-nav-img"><img src="{{ product.image9.url }}" alt="Product Image" style="height: 50px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="product-content">
+                                    <div class="title"><h2>{{ product.name }}</h2></div>
+                                    <div class="ratting">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="price">
+                                        <h4>Price:</h4>
+                                        <p>ksh.{{ product.price }} <span>ksh.{{ product.price2 }}</span></p>
+                                    </div>
+                                    <div class="action" style="margin-top: 50px;">
+                                        <a class="btn" href="{% url 'AddToCartView' product.id %}"><i
+                                                class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row product-detail-bottom">
+                        <div class="col-lg-12">
+                            <ul class="nav nav-pills nav-justified">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="pill" href="#description">Description</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="pill" href="#reviews">Reviews ({{ reviews.count }})</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="description" class="container tab-pane active">
+                                    <h4>{{ product.description }}</h4>
+
+                                </div>
+                                <div id="reviews" class="container tab-pane fade">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {% for reviews in reviews %}
+                                    <div class="reviews-submitted">
+                                        <div class="reviewer">{{ reviews.name}} - <span>{{ reviews.date }}</span></div>
+                                        <div class="ratting">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <p>
+                                            {{ reviews.review }}
+                                        </p>
+                                    </div>
+                                    {% endfor %}
+                                    </div>
+                                <div class="col-md-6">
+                                     <div class="reviews-submit">
+                                        <div class="row form">
+                                            {% if request.user.is_authenticated %}
+                                            <form method="post" onsubmit="ReviewPostSuccess()">
+                                                {% csrf_token %}
+                                                <div class="col-sm-12">
+                                                    <input type="text" placeholder="Name" name="name">
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="email" placeholder="Email" name="email">
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <textarea placeholder="Review" name="review"></textarea>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="submit">Submit</button>
+                                                </div>
+                                            </form>
+                                                {% else %}
+                                                <div class="card">
+                                                <div class="card-body">
+                                                    <p>Please Login to Add a review</p>
+                                                    <a  href="{% url 'LoginPage' %}" class="btn btn-cart">Login</a>
+                                                </div>
+                                                </div>
+                                             {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product">
+                        <div class="section-header">
+                            <h1>Related Products</h1>
+                        </div>
+
+                        <div class="row align-items-center product-slider product-slider-3">
+                            {% for related_products in related_products %}
+                                <div class="col-lg-3">
+                                    <div class="product-item">
+                                        <div class="product-title">
+                                            <a href="#">{{ related_products.name }}</a>
+                                            <div class="ratting">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="product-image">
+                                            <a href="product-detail.html">
+                                                <img src="{{ related_products.image.url }}" alt="Product Image"
+                                                     style="height: 250px;">
+                                            </a>
+                                            <div class="product-action">
+                                                <a href="{% url 'AddToCartView' related_products.id %}"><i
+                                                        class="fa fa-cart-plus"></i></a>
+                                                <a href="{% url 'AddToFavourites' related_products.id %}"><i
+                                                        class="fa fa-heart"></i></a>
+
+                                            </div>
+                                        </div>
+                                        <div class="product-price">
+                                            <h3><span>Ksh.</span>{{ related_products.price }}</h3>
+                                            <a class="btn" href="{% url 'ProductDetail' related_products.id %}"><i
+                                                    class="fa fa-shopping-cart"></i>Buy Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Product Detail End -->
+<script>
+ function ReviewPostSuccess() {
+     swal("Review", "Added Successfully!", "success");
+ }
+</script>
+{% endblock %}
+</body>
+</html>

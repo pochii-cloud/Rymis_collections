@@ -1,0 +1,97 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+        <meta charset="UTF-8">
+        {% block head %}
+        <title>MyOrders</title>
+            {% endblock %}
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+
+    <section class="h-100 gradient-custom bg-transparent">
+        <div class="container py-5 h-100">
+            <div class="row d-flex  h-100">
+                <div class="col-md-8">
+                    <div class="cart-page-inner">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Sn</th>
+                                    <th>Cart_total</th>
+                                    <th>Shipping Fee</th>
+                                    <th>order_total</th>
+                                    <th>Rate</th>
+                                </tr>
+                                </thead>
+                                <tbody class="align-middle">
+                                {% for orders in orders %}
+                                    <tr>
+                                    <td>Order:{{ forloop.counter }}</td>
+                                        <td>
+
+                                                <p>Ksh.{{ orders.cart.total }}</p>
+
+                                        </td>
+                                        <td>Ksh.{{ orders.town.fee }}</td>
+                                        <td>
+                                            Ksh.{{ orders.total }}
+                                        </td>
+{#                                        <td> <a class="btn btn-cart m-2" href="{% url 'AddOrderCodes' orders.id %}">Enter Mpesa Code</a></td>#}
+                                        <td><a class="btn btn-sm m-2" href="{% url 'OrderDetails' orders.pk %}">check order details</a></td>
+
+{#                                           <span class="h2 mb-0 ms-2"><a class="btn btn-danger" href="{% url 'CancelOrder' orders.id %}">Cancel Order</a> </span></h5>#}
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+           <div class="col-lg-4" >
+                        <div class="checkout-inner" style="background:
+                        rgba(0,0,0,.03);padding: 15px;
+                        border: 2px solid grey;
+                        border-radius: 20px;
+">
+                            <div class="checkout-payment">
+                                <div class="payment-methods">
+                                    <h1>How To Make Payment</h1>
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-1" name="payment">
+                                            <label class="custom-control-label" for="payment-1">M-pesa</label>
+                                        </div>
+                                        <div class="payment-content" id="payment-1-show">
+                                            <p>
+                                               1.Open Sim ToolKit<br>
+                                                2.Lipa na M-PESA Option<br>
+                                                3.Buy Goods And Services<br>
+                                                4.Enter Till No:<b>541803</b><br>
+                                                <b>(Winjoy Karimi)</b><br>
+                                                5.Complete Payment<br>
+                                                6.Enter M-Pesa Code and await payment confirmation
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </section>
+
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% block head %}
+    <title>My Wishlist</title>
+    {% endblock %}
+
+</head>
+
+<body>
+{% block body %}
+    <!-- Breadcrumb Start -->
+    <div class="breadcrumb-wrap">
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'Homepage' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'ProductList' %}">Products</a></li>
+                <li class="breadcrumb-item active">Wishlist</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+    {% for messages in messages %}
+        <div class="container-fluid">
+            <div class="alert alert-success p-3">
+                {{ messages }}
+            </div>
+        </div>
+            {% endfor %}
+    <!-- Wishlist Start -->
+    <div class="wishlist-page">
+        <div class="container-fluid">
+            <div class="wishlist-page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Add to Cart</th>
+                                    <th>Remove</th>
+                                </tr>
+                                </thead>
+                                <tbody class="align-middle">
+                                {% for product in product %}
+                                    <tr>
+                                        <td>
+                                            <div class="img">
+                                                <a href="#"><img src="{{ product.image.url }}" alt="Image"></a>
+                                                <p>{{ product.name }}</p>
+                                            </div>
+                                        </td>
+                                        <td>ksh.{{ product.price }}</td>
+                                        <td><a class="btn btn-cart" href="{% url 'ProductDetail' product.id %}">Add to
+                                            Cart</a></td>
+                                        <td><a class="btn btn-cart" href="{% url 'RemoveFavourite' product.id %}"><i
+                                                class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Wishlist End -->
+
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+        <meta charset="utf-8">
+        {% block head %}
+        <title>My Profile</title>
+            {% endblock %}
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
+</head>
+{% block body %}
+    <body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-1 text-gray-800">My Profile</h1>
+                        {% for messages in messages %}
+                            <div class="alert alert-dismissible text-danger">{{ messages }}</div>
+                        {% endfor %}
+                        <div class="container rounded bg-white mt-5 mb-5">
+                            <div class="row">
+                                <div class="col-md-6 border-right">
+                                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                                        {% if user.is_authenticated %}
+                                            <img class="rounded-circle mt-5" width="150px"
+                                                 src="{{ user.profile.avatar.url }}">
+                                            <span class="font-weight-bold">USERNAME:{{ request.user.username }}</span>
+                                            <span class="text-black-50 font-weight-bold">EMAIL:{{ user.email }}</span>
+                                            <span> </span>
+                                            <span class="font-weight-bold">PHONE:{{ user.profile.phone }}</span>
+                                            <span class="text-black-50 font-weight-bold">ADDRESS:{{ user.profile.address }}</span>
+                                            <span> </span>
+                                            </div>
+                                        {% endif %}
+                                </div>
+                                <div class="col-md-5 border-right">
+                                    <div class="p-3 py-5">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="text-right">Profile Settings</h4>
+                                        </div>
+                                        <form method="post" action="{% url 'ProfilePage' %}"
+                                              enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="row mt-2">
+                                                <div class="col-md-12"><label class="labels">User Name</label><input
+                                                        type="text" class="form-control"
+                                                        placeholder="{{ user.username }}"
+                                                        value=""{{ form.username }}</div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-md-12"><label class="labels">Email</label><input
+                                                        type="email" class="form-control" placeholder="{{ user.email }}"
+                                                        value=""{{ form.email }}</div>
+                                                <div class="col-md-12"><label class="labels">Mobile Number</label><input
+                                                        type="number" class="form-control"
+                                                        placeholder="{{ user.profile.phone }}"
+                                                        value=""{{ profile_form.phone }}</div>
+                                                <div class="col-md-12"><label class="labels">Address</label><input
+                                                        type="text" class="form-control"
+                                                        placeholder="{{ user.profile.address }}"
+                                                        value=""{{ profile_form.address }}</div>
+                                                <div class="form-group col-md-12"><label class="labels"> choose
+                                                    Avatar:</label><input type="file" {{ profile_form.address }}</div>
+
+
+                                            </div>
+                                            <div class="mt-5 text-center">
+                                                <button class="btn btn-primary profile-button" type="submit">Update
+                                                    Profile
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+            </div>
+
+            <!-- End of Main Content -->
+    <!-- End of Page Wrapper -->
+
+    </body>
+{% endblock %}
+</html>

@@ -1,0 +1,157 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% block head %}
+    <title>Products List</title>
+    {% endblock %}
+
+</head>
+
+<body>
+{% block body %}
+    <!-- Breadcrumb Start -->
+    <div class="breadcrumb-wrap">
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'Homepage' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'ProductList' %}">Products</a></li>
+                <li class="breadcrumb-item active">Product List</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Product List Start -->
+    <div class="product-view">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="product-view-top">
+
+                            </div>
+                        </div>
+                        {% for products in products %}
+                            <div class="col-md-3">
+                                <div class="product-item">
+                                    <div class="product-title">
+                                        <a href="#">{{ products.name }}</a>
+                                        <div class="ratting">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="product-image">
+                                        <a href="product-detail.html">
+                                            <img src="{{ products.image.url }}" alt="Product Image"
+                                                 style="height: 250px">
+                                        </a>
+                                        <div class="product-action">
+                                            <a href="{% url 'AddToCartView' products.id %}"><i
+                                                    class="fa fa-cart-plus"></i></a>
+                                            {% if request.user.is_authenticated %}
+                                                <a href="{% url 'AddToFavourites' products.id %}"><i
+                                                        class="fa fa-heart"></i></a>
+                                            {% else %}
+                                                <a onclick="loginfirst()"><i class="fa fa-heart"></i></a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="product-price">
+                                        <h3><span>Ksh.</span>{{ products.price }}</h3>
+                                        <a class="btn" href="{% url 'ProductDetail' products.id %}"><i
+                                                class="fa fa-shopping-cart"></i>Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Pagination Start -->
+                    <div class="row container">
+                        <div class="col-md-12">
+                            {% if is_paginated %}
+                                <div class="pagination">
+                                    <ul class="pagination justify-content-center">
+                                        {% if page_obj.has_previous %}
+                                            <li class="page-item active">
+                                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item active">&laquo;</li>
+                                        {% endif %}
+                                        {% for i in paginator.page_range %}
+                                            {% if page_obj.number == i %}
+                                                <li class="page-item">
+                                                    <span>{{ i }}</span>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item">
+                                                    <a href="?page={{ i }}">{{ i }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if page_obj.has_next %}
+                                            <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                                        {% else %}
+                                            <li class="disabled"><span>&raquo;</span></li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {#                        <div class="col-md-12">#}
+                    {#                             {% if is_paginated %}#}
+                    {#                            <nav aria-label="Page navigation example">#}
+                    {#                                <ul class="pagination justify-content-center">#}
+                    {#                                    {% if page_obj.has_previous %}#}
+                    {#                                    <li class="page-item disabled">#}
+                    {##}
+                    {#                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>#}
+                    {#                                    </li>#}
+                    {#                                    {% else %}#}
+                    {#                                    <li class="page-item active"><a class="page-link" href="#">&laquo;</a></li>#}
+                    {#                                    {% endif %}#}
+                    {#                                   {% for i in paginator.page_range %}#}
+                    {#                        {% if page_obj.number == i %}#}
+                    {#                                    <li class="page-item"><a class="page-link" href="#">{{ i }}</a></li>#}
+                    {#                                {% else %}#}
+                    {#                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>#}
+                    {#                                {% endif %}#}
+                    {#                                {% endfor %}#}
+                    {#                                 {% if page_obj.has_next %}#}
+                    {#                                    <li class="page-item">#}
+                    {#                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>#}
+                    {#                                    </li>#}
+                    {#                                {% else %}#}
+                    {#                                   <li class="page-item">#}
+                    {#                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>#}
+                    {#                                    </li>#}
+                    {#                                {% endif %}#}
+                    {#                                {% endif %}#}
+                    {#                                </ul>#}
+                    {#                            </nav>#}
+                    {#                        </div>#}
+                    <!-- Pagination Start -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product List End -->
+    <script>
+        function loginfirst() {
+            alert('log in to add products to favourites')
+        }
+    </script>
+{% endblock %}
+</body>
+</html>

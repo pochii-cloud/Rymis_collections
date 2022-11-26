@@ -1,0 +1,94 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% block head %}
+    <title>Checkout</title>
+   {% endblock %}
+
+</head>
+
+<body>
+{% block body %}
+    <!-- Breadcrumb Start -->
+    <div class="breadcrumb-wrap">
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Products</a></li>
+                <li class="breadcrumb-item active">Checkout</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Checkout Start -->
+    <div class="checkout">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="checkout-inner">
+                        <div class="billing-address">
+                            <h2>Billing Address</h2>
+                            <form method="post" action="" id="personForm" data-cities-url="{% url 'ajax_load_cities' %}"
+                                  novalidate>
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{ form.ordered_by|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.mobile|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.county|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.town|as_crispy_field }}
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary" type="submit">submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="checkout-inner">
+                        <div class="checkout-summary">
+                            <h1>Cart Total</h1>
+                            <p class="sub-total">Sub Total<span>Ksh.{{ cart.total }}</span></p>
+                            <h2>Grand Total<span>Ksh.{{ cart.total }}</span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $("#id_county").change(function () {
+            var url = $("#personForm").attr("data-cities-url");
+            var region_id = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'county': region_id
+                },
+                success: function (data) {
+                    $("#id_town").html(data);
+                }
+            });
+
+        });
+    </script>
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block head %}
+    <title>Customer_comment</title>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container-fluid">
+        <form method="post" onsubmit="submitresponse()">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+
+                <div class="col-md-6">
+                    <h3 style="font-weight: bold;text-decoration-line: underline;">Say Something About Us</h3><br>
+
+                    {{ form.comment|as_crispy_field }}
+                    <button class=" btn btn-plus mb-4" type="submit">submit</button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+        <script>
+        function submitresponse() {
+            swal({
+                icon: "success",
+                text:'Response Submitted Thankyou'
+            });
+        }
+    </script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,131 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% block head %}
+    <title>MyCart</title>
+    {% endblock %}
+</head>
+
+<body>
+{% block body %}
+    <!-- Breadcrumb Start -->
+    <div class="breadcrumb-wrap">
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'Homepage' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'ProductList' %}">Products</a></li>
+                <li class="breadcrumb-item active">Cart</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Cart Start -->
+    {% for messages in messages %}
+        <div class="container-fluid">
+            <div class="alert alert-success p-3">
+                {{ messages }}
+            </div>
+        </div>
+    {% endfor %}
+    <div class="cart-page">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-8">
+                <div class="cart-page-inner">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Rate</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                            </thead>
+                            <tbody class="align-middle">
+                            {% for cp in cart.cartproduct_set.all %}
+                                <tr>
+                                    <td>
+                                        <div class="img">
+                                            <a href="#"><img src="{{ cp.product.image.url }}" alt="Image"
+                                                             style="height: 50px"></a>
+                                            <p>{{ cp.product.name }}</p>
+                                        </div>
+                                    </td>
+                                    <td>Ksh.{{ cp.product.price }}</td>
+                                    <td>
+                                        <button><a class="text-white"
+                                                   href="{% url 'ManageCart' cp.id %}?action=dcr"><i
+                                                class="fa fa-minus"></i></a></button>
+
+                                        <a>{{ cp.quantity }}</a>
+                                        <button><a class="text-white"
+                                                   href="{% url 'ManageCart' cp.id %}?action=inc"><i
+                                                class="fa fa-plus"></i></a></button>
+
+                                    </td>
+                                    <td>{{ cp.rate }}</td>
+                                    <td>Ksh.{{ cp.subtotal }}</td>
+                                    <td>
+                                        <button><a class="text-white"
+                                                   href="{% url 'ManageCart' cp.id %}?action=rmv"> <i
+                                                class="fa fa-trash"></i></a></button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="cart-page-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="coupon">
+                                <input type="text" placeholder="Coupon Code">
+                                <button>Apply Code</button>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="cart-summary">
+                                <div class="cart-content">
+                                    <h1>Cart Summary</h1>
+                                    <p>Sub Total<span>Ksh{{ cart.total }}</span></p>
+                                    <h2>Grand Total<span>Ksh{{ cart.total }}</span></h2>
+                                </div>
+                                <div class="cart-btn">
+                                    {% if request.user.is_authenticated %}
+                                        {% if cart.cartproduct_set.all %}
+                                        <button><a href="{% url 'CheckoutView' %}">Checkout</a></button>
+                                            {% endif %}
+                                        <br>
+                                    {% else %}
+                                        <div class="card mt-2">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Login Required</h5>
+                                            <p class="card-text">To Complete The Order You Must Be logged In </p>
+                                            <a href="{% url 'LoginPage' %}" class="btn btn-cart">Login</a>
+                                        </div>
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart End -->
+
+{% endblock %}
+</body>
+</html>
