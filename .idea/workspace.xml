@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8fcf29f6-d1ce-49e4-bde8-325d0b2481ca" name="Default Changelist" comment="" />
+    <list default="true" id="8fcf29f6-d1ce-49e4-bde8-325d0b2481ca" name="Default Changelist" comment="">
+      <change beforePath="D:/PycharmProjects/Rymis_Collection/.idea/workspace.xml" beforeDir="false" afterPath="D:/PycharmProjects/Rymis_Collection/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="D:/PycharmProjects/Rymis_Collection/Products/models.py" beforeDir="false" afterPath="D:/PycharmProjects/Rymis_Collection/Products/models.py" afterDir="false" />
+      <change beforePath="D:/PycharmProjects/Rymis_Collection/db.sqlite3" beforeDir="false" afterPath="D:/PycharmProjects/Rymis_Collection/db.sqlite3" afterDir="false" />
+      <change beforePath="D:/PycharmProjects/Rymis_Collection/templates/product-detail.html" beforeDir="false" afterPath="D:/PycharmProjects/Rymis_Collection/templates/product-detail.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +19,9 @@
         <option value="HTML File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="D:/PycharmProjects/Rymis_Collection" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -111,6 +119,9 @@
       <workItem from="1668741836263" duration="3976000" />
       <workItem from="1668843827784" duration="1621000" />
       <workItem from="1669378094884" duration="5844000" />
+      <workItem from="1669450033494" duration="1487000" />
+      <workItem from="1669676939406" duration="2496000" />
+      <workItem from="1669680249775" duration="524000" />
     </task>
     <servers />
   </component>

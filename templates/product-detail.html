@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     {% block head %}
-    <title>{{ product }} details</title>
+        <title>{{ product }} details</title>
     {% endblock %}
 
 </head>
@@ -37,13 +37,41 @@
                                     <img src="{{ product.image.url }}" alt="Product Image" style="height: 250px;">
                                     <img src="{{ product.image1.url }}" alt="Product Image" style="height: 250px;">
                                     <img src="{{ product.image2.url }}" alt="Product Image" style="height: 250px;">
-                                    <img src="{{ product.image3.url }}" alt="Product Image" style="height: 250px;">
-                                    <img src="{{ product.image4.url }}" alt="Product Image" style="height: 250px;">
-                                    <img src="{{ product.image5.url }}" alt="Product Image" style="height: 250px;">
-                                    <img src="{{ product.image6.url }}" alt="Product Image" style="height: 250px;">
-                                    <img src="{{ product.image7.url }}" alt="Product Image" style="height: 250px;">
-                                    <img src="{{ product.image8.url }}" alt="Product Image" style="height: 250px;">
-                                    <img src="{{ product.image9.url }}" alt="Product Image" style="height: 250px;">
+                                    {% if product.image3 %}
+                                        <img src="{{ product.image3.url }}" alt="Product Image" style="height: 250px;">
+                                    {% else %}
+
+                                    {% endif %}
+                                    {% if product.image4 %}
+                                        <img src="{{ product.image4.url }}" alt="Product Image" style="height: 250px;">
+                                    {% else %}
+
+                                    {% endif %}
+                                    {% if product.image5 %}
+                                        <img src="{{ product.image5.url }}" alt="Product Image" style="height: 250px;">
+                                    {% else %}
+
+                                    {% endif %}
+                                    {% if product.image6 %}
+                                        <img src="{{ product.image6.url }}" alt="Product Image" style="height: 250px;">
+                                    {% else %}
+
+                                    {% endif %}
+                                    {% if product.image7 %}
+                                        <img src="{{ product.image7.url }}" alt="Product Image" style="height: 250px;">
+                                    {% else %}
+
+                                    {% endif %}
+                                    {% if product.image8 %}
+                                        <img src="{{ product.image8.url }}" alt="Product Image" style="height: 250px;">
+                                    {% else %}
+
+                                    {% endif %}
+                                    {% if product.image9 %}
+                                        <img src="{{ product.image9.url }}" alt="Product Image" style="height: 250px;">
+                                    {% else %}
+
+                                    {% endif %}
 
                                 </div>
                                 <div class="product-slider-single-nav normal-slider">
@@ -53,13 +81,65 @@
                                                                      style="height: 50px;"></div>
                                     <div class="slider-nav-img"><img src="{{ product.image2.url }}" alt="Product Image"
                                                                      style="height: 50px;"></div>
-                                    <div class="slider-nav-img"><img src="{{ product.image3.url }}" alt="Product Image" style="height: 50px;"></div>
-                                    <div class="slider-nav-img"><img src="{{ product.image4.url }}" alt="Product Image" style="height: 50px;"></div>
-                                    <div class="slider-nav-img"><img src="{{ product.image5.url }}" alt="Product Image" style="height: 50px;"></div>
-                                    <div class="slider-nav-img"><img src="{{ product.image6.url }}" alt="Product Image" style="height: 50px;"></div>
-                                    <div class="slider-nav-img"><img src="{{ product.image7.url }}" alt="Product Image" style="height: 50px;"></div>
-                                    <div class="slider-nav-img"><img src="{{ product.image8.url }}" alt="Product Image" style="height: 50px;"></div>
-                                    <div class="slider-nav-img"><img src="{{ product.image9.url }}" alt="Product Image" style="height: 50px;"></div>
+
+                                    {% if product.image3 %}
+                                        <div class="slider-nav-img">
+                                            <img src="{{ product.image3.url }}" alt="Product Image"
+                                                 style="height: 50px;">
+                                        </div>
+                                    {% else %}
+                                    {% endif %}
+
+
+                                    {% if product.image4 %}
+                                        <div class="slider-nav-img">
+                                            <img src="{{ product.image4.url }}" alt="Product Image"
+                                                 style="height: 50px;">
+                                        </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if product.image5 %}
+                                        <div class="slider-nav-img">
+
+                                            <img src="{{ product.image5.url }}" alt="Product Image"
+                                                 style="height: 50px;">
+                                        </div>
+                                    {% else %}
+                                    {% endif %}
+
+
+                                    {% if product.image6 %}
+                                        <div class="slider-nav-img">
+                                            <img src="{{ product.image6.url }}" alt="Product Image"
+                                                 style="height: 50px;">
+                                        </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if product.image7 %}
+                                        <div class="slider-nav-img">
+
+                                            <img src="{{ product.image7.url }}" alt="Product Image"
+                                                 style="height: 50px;">
+                                        </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if product.image8 %}
+                                        <div class="slider-nav-img">
+
+                                            <img src="{{ product.image8.url }}" alt="Product Image"
+                                                 style="height: 50px;">
+                                        </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if product.image9 %}
+                                        <div class="slider-nav-img">
+
+                                            <img src="{{ product.image9.url }}" alt="Product Image"
+                                                 style="height: 50px;">
+                                        </div>
+                                    {% else %}
+                                    {% endif %}
+
                                 </div>
                             </div>
                             <div class="col-md-7">
@@ -93,7 +173,8 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" href="#reviews">Reviews ({{ reviews.count }})</a>
+                                    <a class="nav-link" data-toggle="pill" href="#reviews">Reviews
+                                        ({{ reviews.count }})</a>
                                 </li>
                             </ul>
 
@@ -103,55 +184,56 @@
 
                                 </div>
                                 <div id="reviews" class="container tab-pane fade">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        {% for reviews in reviews %}
-                                    <div class="reviews-submitted">
-                                        <div class="reviewer">{{ reviews.name}} - <span>{{ reviews.date }}</span></div>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {% for reviews in reviews %}
+                                                <div class="reviews-submitted">
+                                                    <div class="reviewer">{{ reviews.name }} -
+                                                        <span>{{ reviews.date }}</span></div>
+                                                    <div class="ratting">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <p>
+                                                        {{ reviews.review }}
+                                                    </p>
+                                                </div>
+                                            {% endfor %}
                                         </div>
-                                        <p>
-                                            {{ reviews.review }}
-                                        </p>
-                                    </div>
-                                    {% endfor %}
-                                    </div>
-                                <div class="col-md-6">
-                                     <div class="reviews-submit">
-                                        <div class="row form">
-                                            {% if request.user.is_authenticated %}
-                                            <form method="post" onsubmit="ReviewPostSuccess()">
-                                                {% csrf_token %}
-                                                <div class="col-sm-12">
-                                                    <input type="text" placeholder="Name" name="name">
+                                        <div class="col-md-6">
+                                            <div class="reviews-submit">
+                                                <div class="row form">
+                                                    {% if request.user.is_authenticated %}
+                                                        <form method="post" onsubmit="ReviewPostSuccess()">
+                                                            {% csrf_token %}
+                                                            <div class="col-sm-12">
+                                                                <input type="text" placeholder="Name" name="name">
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <input type="email" placeholder="Email" name="email">
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <textarea placeholder="Review" name="review"></textarea>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <button type="submit">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    {% else %}
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <p>Please Login to Add a review</p>
+                                                                <a href="{% url 'LoginPage' %}" class="btn btn-cart">Login</a>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <input type="email" placeholder="Email" name="email">
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <textarea placeholder="Review" name="review"></textarea>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <button type="submit">Submit</button>
-                                                </div>
-                                            </form>
-                                                {% else %}
-                                                <div class="card">
-                                                <div class="card-body">
-                                                    <p>Please Login to Add a review</p>
-                                                    <a  href="{% url 'LoginPage' %}" class="btn btn-cart">Login</a>
-                                                </div>
-                                                </div>
-                                             {% endif %}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                </div>
 
 
                                 </div>
@@ -207,11 +289,11 @@
         </div>
     </div>
     <!-- Product Detail End -->
-<script>
- function ReviewPostSuccess() {
-     swal("Review", "Added Successfully!", "success");
- }
-</script>
+    <script>
+        function ReviewPostSuccess() {
+            swal("Review", "Added Successfully!", "success");
+        }
+    </script>
 {% endblock %}
 </body>
 </html>

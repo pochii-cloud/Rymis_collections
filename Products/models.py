@@ -16,23 +16,23 @@ class Category(models.Model):
 
 
 class Products(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True,editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, editable=False)
     name = models.CharField(max_length=200)
     image = models.ImageField()
     image1 = models.ImageField(null=True, blank=False)
     image2 = models.ImageField(null=True, blank=False)
-    image3 = models.ImageField(null=True, blank=False)
-    image4 = models.ImageField(null=True, blank=False)
-    image5 = models.ImageField(null=True, blank=False)
-    image6 = models.ImageField(null=True, blank=False)
-    image7 = models.ImageField(null=True, blank=False)
-    image8 = models.ImageField(null=True, blank=False)
-    image9 = models.ImageField(null=True, blank=False)
+    image3 = models.ImageField(blank=True, null=True)
+    image4 = models.ImageField(blank=True, null=True)
+    image5 = models.ImageField(blank=True, null=True)
+    image6 = models.ImageField(blank=True, null=True)
+    image7 = models.ImageField(blank=True, null=True)
+    image8 = models.ImageField(blank=True, null=True)
+    image9 = models.ImageField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.PositiveIntegerField(default=0)
     price2 = models.PositiveIntegerField(default=0)
     description = models.CharField(max_length=200, null=True)
-    favourite = models.BooleanField(default=False,editable=False)
+    favourite = models.BooleanField(default=False, editable=False)
 
     def __str__(self):
         return self.name
